@@ -183,9 +183,13 @@
   }
 
   // ---------------------- connection handling -----------------------
-  function prepareNewConnection() {
-    let pc_config = {"iceServers":[]};
-    let peer = new RTCPeerConnection(pc_config);
+  function prepareNewConnection(id) {
+  let pc_config = {"iceServers":[
+    {"urls": "stun:coturn.s14a2307.github.io:80"},
+    {"urls":"turn:coturn.s14a2307.github.io:80?transport=udp", "username":"user", "credential":"password"},
+    {"urls":"turn:coturn.s14a2307.github.io:80?transport=tcp", "username":"user", "credential":"password"}
+  ]};
+  let peer = new RTCPeerConnection(pc_config);
 
     // --- on get remote stream ---
     if ('ontrack' in peer) {
